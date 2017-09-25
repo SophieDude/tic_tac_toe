@@ -114,7 +114,9 @@ public class TicTacToeModel{
 
 
         if (row < width && col < width) {
-           return true;
+           if (row >= 0 && col >= 0) {
+              return true;
+           }
         }
 
         return false;
@@ -204,24 +206,24 @@ public class TicTacToeModel{
         playerwin = true;
         for(int i = 0; i < width; i++) {
              if(!grid[i][i].equals(mark)){
-             playerwin = false;
+               playerwin = false;
 
             }
-            if (playerwin) {
-              return true;
-            }
+        }
+        if (playerwin) {
+           return true;
         }
         
         // Right to left
         playerwin = true;
         for(int i = 0; i < width; i++) {
              if(!grid[i][width-i-1].equals(mark)){
-             playerwin = false;
+                playerwin = false;
 
             }
-            if (playerwin) {
-              return true;
-            }
+        }
+        if (playerwin) {
+           return true;
         }
 
          return false;
@@ -229,22 +231,19 @@ public class TicTacToeModel{
     }
     
     private boolean isTie() {
-        
+
         /* Check the squares of the board to see if the game is a tie */
 
         /* INSERT YOUR CODE HERE */             /* If grid is full and if there is no winner (from above function), then it must be a tie.  */
 
- //        for(int i = 0; i < width; i++) {
-//              for(int j = 0; j < width; j++) {
-//                 if(!grid[i][j].equals(mark)){
-//                 }
-//             }
-//             if (playerwin) {
-//               return true;
-//             }
-//         }
-
-        return false;
+        for(int i = 0; i < width; i++) {
+              for(int j = 0; j < width; j++) {
+                if (isValidSquare(i,j) && !isSquareMarked(i,j)) {
+                   return false;
+                }
+              }
+        }
+        return true;
 
     }
 

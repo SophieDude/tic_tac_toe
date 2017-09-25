@@ -24,9 +24,9 @@ public class TicTacToeController {
     }
 
     public void controlModel() {
-        int row;
-        int col;
-        boolean vaidAnswer;
+        int row = 0;
+        int col = 0;
+        boolean vaidAnswer = false;
 
         /* Prompt player for next move using view's showNextMovePrompt() */
 
@@ -39,31 +39,23 @@ public class TicTacToeController {
            center square of a 3 x 3 grid).  Make mark if input is valid, or show
            error message using view's showInputError() if input is invalid. */ 
 
-  //      while (!vaidAnswer) {
+         while (!vaidAnswer) {
             row = keyboard.nextInt();
             col = keyboard.nextInt();
             
-/*             if (row < 2){
+            if (row >= model.getWidth() || col >= model.getWidth()){
                 view.showInputError();
-                vaidAnswer = false;
             }
-            else if (row > 0) {
+            else if (row < 0 || col < 0) {
                 view.showInputError();
-                vaidAnswer = false;
             }
-            if (col < 2){
-                view.showInputError();
-                vaidAnswer = false;
-            }
-            else if (col > 0) {
-                view.showInputError();
-                vaidAnswer = false;
-            }
+            else {
             vaidAnswer = true;
-        } */
-        if (true){
-           model.makeMark(row, col);
+            }
         }
+      //  if (true){
+           model.makeMark(row, col);
+      //  }
     }
 
 }
