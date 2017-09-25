@@ -51,7 +51,7 @@ public class TicTacToeModel{
     private Mark[][] grid; /* Game grid */
     private boolean xTurn; /* True if X is current player */
     private int width;     /* Size of game grid */
-    
+
     /* DEFAULT CONSTRUCTOR */
     
     public TicTacToeModel() {
@@ -73,14 +73,10 @@ public class TicTacToeModel{
         
         /* Create grid (width x width) as a 2D Mark array */
 
-        /* INSERT YOUR CODE HERE */         
-        
         grid = new Mark[width][width];
 
         /* Initialize grid by filling every square with empty marks */
 
-        /* INSERT YOUR CODE HERE */
-        
         for(int i = 0; i < grid.length; i++) {
                 for(int j = 0; j < grid[0].length; j++) {
                   grid[i][j] = Mark.EMPTY;
@@ -88,7 +84,7 @@ public class TicTacToeModel{
         }
         
     }
-	
+    
     public boolean makeMark(int row, int col) {
         
         /* Place the current player's mark in the square at the specified
@@ -103,6 +99,7 @@ public class TicTacToeModel{
            else {
               grid[row][col] = Mark.O;
            }
+           xTurn = !xTurn;
            return true;
         }
         else {
@@ -123,7 +120,7 @@ public class TicTacToeModel{
         return false;
         
     }
-	
+    
     private boolean isSquareMarked(int row, int col) {
         
         /* Return true if square at specified location is marked */
@@ -132,59 +129,131 @@ public class TicTacToeModel{
            return true;
         }
 
-        return false; /* remove this line! */
+        return false;
             
     }
-	
+    
     public Mark getMark(int row, int col) {
         
         /* Return mark from the square at the specified location */
-        
-        /* INSERT YOUR CODE HERE */
 
         return grid[row][col];
             
     }
-	
+    
     public Result getResult() {
         
         /* Use isMarkWin() to see if X or O is the winner, if the game is a
            tie, or if the game is not over, and return the corresponding Result
            value */
         
-        /* INSERT YOUR CODE HERE */
+        /* INSERT YOUR CODE HERE */                 /* call isMarkWin(), then call isTie(), then call isGameover(), return False if all are False, otherwise return True */
 
-        return null; /* remove this line! */
+        if(isMarkWin(Mark.X)){
+          return Result.X;
+        }
+        else if(isMarkWin(Mark.O)){
+          return Result.O;
+        }
+        else if(isTie()){
+          return Result.TIE;
+        }
+        else{
+          return Result.NONE;
+        }
+
 
     }
-	
+    
     private boolean isMarkWin(Mark mark) {
-        
+
         /* Check the squares of the board to see if the specified mark is the
            winner */
-        
-        /* INSERT YOUR CODE HERE */
 
-        return false; /* remove this line! */
+        /* INSERT YOUR CODE HERE */             /* check grid columns for all X or all O, check grid rows for all X or all O, check diagonals, for all X or O, any one of these is a winner */
+        boolean playerwin = true;
+        /* check rows for a winner */
+        for(int i = 0; i < width; i++) {
+             playerwin = true;
+             for(int j = 0; j < width; j++) {
+                if(!grid[i][j].equals(mark)){
+                   playerwin = false;
+                }
+            }
+            if (playerwin) {
+              return true;
+            }
+        }
+
+        playerwin = true;
+        /* check Columns for a winner */
+        for(int i = 0; i < width; i++) {
+             playerwin = true;
+             for(int j = 0; j < width; j++) {
+                if(!grid[j][i].equals(mark)){
+                   playerwin = false;
+                }
+            }
+            if (playerwin) {
+              return true;
+            }
+        }
+
+        /* check diagonals for a winner */   
+        // left to Right
+        playerwin = true;
+        for(int i = 0; i < width; i++) {
+             if(!grid[i][i].equals(mark)){
+             playerwin = false;
+
+            }
+            if (playerwin) {
+              return true;
+            }
+        }
+        
+        // Right to left
+        playerwin = true;
+        for(int i = 0; i < width; i++) {
+             if(!grid[i][width-i-1].equals(mark)){
+             playerwin = false;
+
+            }
+            if (playerwin) {
+              return true;
+            }
+        }
+
+         return false;
 
     }
-	
+    
     private boolean isTie() {
         
         /* Check the squares of the board to see if the game is a tie */
 
-        /* INSERT YOUR CODE HERE */
+        /* INSERT YOUR CODE HERE */             /* If grid is full and if there is no winner (from above function), then it must be a tie.  */
 
-        return false; /* remove this line! */
-        
+ //        for(int i = 0; i < width; i++) {
+//              for(int j = 0; j < width; j++) {
+//                 if(!grid[i][j].equals(mark)){
+//                 }
+//             }
+//             if (playerwin) {
+//               return true;
+//             }
+//         }
+
+        return false;
+
     }
 
     public boolean isGameover(){
         
         /* Return true if the game is over */
         
-        return Result.NONE != getResult();
-        
+        return !(getResult().equals(Result.NONE));
+
     }
 
     public boolean isXTurn(){

@@ -5,18 +5,18 @@ public class TicTacToeView {
     private TicTacToeModel model;
     
     /* CONSTRUCTOR */
-	
+    
     public TicTacToeView(TicTacToeModel model) {
         
         this.model = model;
         
     }
-	
+    
     public void viewModel() {
         
         /* Print the board to the console (see examples) */
 
-        System.out.print("  ");
+        System.out.print("\n  ");
 
         for(int i = 0; i < model.getWidth(); i++) {
                 System.out.print(i);
@@ -31,7 +31,7 @@ public class TicTacToeView {
                 }
                 System.out.print("\n");
         }
-        System.out.print("\n");
+        System.out.print("\n\n\n");
     }
 
     public void showNextMovePrompt() {
@@ -56,6 +56,9 @@ public class TicTacToeView {
 
         /* INSERT YOUR CODE HERE */
 
+        System.out.print("Invalid entry.  Enter 0, 1, or 2 for rows/column.");
+
+
     }
 
     public void showResult(String r) {
@@ -65,5 +68,5 @@ public class TicTacToeView {
         System.out.println(r + "!");
 
     }
-	
+    
 }
